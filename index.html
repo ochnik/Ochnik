@@ -1,0 +1,140 @@
+
+<!doctype html>
+<html lang="pl">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <title>Ochnik</title>
+  </head>
+  	<body>
+  		<main class="container-fluid">
+	    	<h1 class="display-1 text-center"> Ochnik </h1>
+	    	<article class="row">
+					<form onsubmit="return addPosition()" class="col-sm-6 text-center" id="positionForm">
+					  <label for="position">Stanowisko:</label><br>
+					  <input type="text" id="position" name="position"><br>
+					  <button form="positionForm" value="Submit">Submit</button>
+					</form>
+					<form onsubmit="return addWorker()" class="col-sm-6 text-center" id="workerForm">
+					  <label for="worker">Pracownik:</label><br>
+					  <input type="text" id="worker" name="worker"><br>
+					  <button type="submit" form="workerForm" value="Submit">Submit</button>
+					</form>
+				</article>
+				<article class="row text-center">
+					<section class="col-sm-6">
+						<table id="positionTable" class="table table-striped table-dark">
+
+							<thead>
+								<th>Stanowisko</th>
+							</thead>
+							<tbody>
+							</tbody>
+
+						</table>
+					</section>
+					<section class="col-sm-6">
+						<table id="workerTable" class="table table-striped  table-dark">
+							<thead>
+								<th>Pracownik</th>
+							</thead>
+							<tbody>
+							</tbody>
+
+						</table>
+					</section>
+				</article>
+				<article class="row center-block">
+					<section class="col text-center">
+						<button class="btn btn-info" onclick="shuffleTable()">Wygeneruj</button>
+					</section>
+				</article>
+		</main>
+
+
+
+
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    <script type="text/javascript">
+			var positions = [];
+
+			function addPosition() {
+			  position = document.getElementById('position').value;
+			  positions.push(position)
+			  console.log(positions);
+			  var tbodyRef = document.getElementById('positionTable').getElementsByTagName('tbody')[0];
+
+				var newRow = tbodyRef.insertRow();
+
+				var newCell = newRow.insertCell();
+
+				var newText = document.createTextNode(position);
+				newCell.appendChild(newText);
+			  return false; // stop submission
+			}
+    </script>
+    <script type="text/javascript">
+			var workers = [];
+
+			function addWorker() {
+			  worker = document.getElementById('worker').value;
+			  workers.push(worker)
+			  console.log(workers);
+			  var tbodyRef = document.getElementById('workerTable').getElementsByTagName('tbody')[0];
+
+				var newRow = tbodyRef.insertRow();
+
+				var newCell = newRow.insertCell();
+
+				var newText = document.createTextNode(worker);
+				newCell.appendChild(newText);
+			  return false;
+			}
+    </script>
+    <script>
+    	function shuffleTable() {
+			  //get the parent table for convenience
+			  let positionTable = document.getElementById("positionTable");
+			  let workerTable=document.getElementById("workerTable");
+
+			  if(positionTable.length!=workerTable.length)
+			  {
+			  	alert("Tabele zawierają różne liczbę rekordów");
+			  }
+			  else
+			  {
+				  let positionRows = positionTable.querySelectorAll("tr");
+				  let workerRows=workerTable.querySelectorAll("tr");
+
+				  let positionPrepare = Array.from(positionRows).slice(1);
+				  let workerPrepare=Array.from(workerRows).slice(1);
+				  shuffledPositions=shuffleArray(positionPrepare);
+				  shuffledWorkers=shuffleArray(workerPrepare);
+
+				  for (const row of shuffledPositions) {
+				    positionTable.appendChild(row);
+				  }
+				  for (const row of shuffledWorkers) {
+				    workerTable.appendChild(row);
+				  }
+				}
+				//To nie mój algorytm jak coś 
+				function shuffleArray(array) {
+				  for (var i = array.length - 1; i > 0; i--) 
+				  {
+		        var j = Math.floor(Math.random() * (i + 1));
+		        var temp = array[i];
+		        array[i] = array[j];
+		        array[j] = temp;
+	    		}	
+				  return array;
+				}
+			}
+    </script>
+  </body>
+</html>
