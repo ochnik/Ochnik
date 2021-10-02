@@ -7,4 +7,4 @@ Stosowany algorytm zapewnia, że dwa kolejne losowania będą różne.
 
 ## Uruchomienie
 
-Należy pobrać plik (z linii komend lub przy spakowanej formy). Następnie uruchomić plik index.html. Program uruchomi się w formie prostej strony internetowej.
+Należy pobrać plik (z linii komend lub przy spakowanej formy) klikając zielony guzik "Code". Następnie uruchomić plik index.html. Program uruchomi się w formie prostej strony internetowej.
